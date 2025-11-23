@@ -7,7 +7,7 @@ const router = express.Router();
 router.use(session({
     secret: 'superduper', 
     resave: false, 
-    saveUninitialized: true,
+    saveUninitialized: true, 
 }));
 
 router.post('/signup', async (req, res) => {
@@ -40,6 +40,8 @@ router.put('/signin', async (req, res) => {
         if (ret.rows[0].password != password) return res.status(400).json({ error: 'Incorrect password' });
 
         req.session.user = username;
+        req.session.accountId = ret.rows[0].account_id
+
         return res.status(200).json({ message: 'Signin successful' });
     }
     catch (err) {
@@ -57,7 +59,7 @@ router.get('/signout', (req, res) => {
 });
 
 router.get('/current', (req, res) => {
-    return res.json({ user: req.session.user });
+    return res.json({ user: req.session.user, accountId: req.session.accountId });
 });
 
 module.exports = router;

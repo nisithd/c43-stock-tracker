@@ -68,6 +68,7 @@ CREATE TABLE requestFriendship (
     PRIMARY KEY (sender_id, receiver_id)
 );
 
+-- stocklists that are shared with an account
 CREATE TABLE accountCanSeeStockList (
     viewer_id INT REFERENCES account(account_id),
     stock_list_id INT REFERENCES stockList(stock_list_id),
