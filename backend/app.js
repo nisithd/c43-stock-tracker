@@ -2,7 +2,17 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const http = require('http');
-const { Pool } = require('pg');
+const { Pool } = require('pg'); 
+const session = require('express-session');
+const app = express();
+
+app.use(session({
+  secret: 'superduper', 
+  resave: false, 
+  saveUninitialized: true, 
+}));
+
+app.use(express.json());
 
 const userRouter = require('./routes/user');
 const stockRouter = require('./routes/stocks');
@@ -11,10 +21,6 @@ const friendsRouter = require('./routes/friends');
 
 const PORT = 3000;
 
-
-const app = express();
-
-app.use(express.json());
 
 app.use('/user', userRouter);
 app.use('/stocks', stockRouter);

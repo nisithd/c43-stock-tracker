@@ -72,8 +72,7 @@ const friendRequestExists = async (userId1, userId2) => {
 
 // get all friends or friend requests for a user by status (for accepted and rejected only, NOT PENDING)
 router.get('/:status', async (req, res) => {
-    // const userId = req.session.accountId;
-    const userId = req.body.userId;
+    const userId = req.session.accountId;
     const status = req.params.status;
 
     if (!['accepted', 'rejected'].includes(status)) {
@@ -111,8 +110,7 @@ router.get('/:status', async (req, res) => {
 
 // get all incoming friend requests for a user
 router.get('/requests/incoming', async (req, res) => {
-    // const userId = req.session.accountId;
-    const userId = req.body.userId;
+    const userId = req.session.accountId;
     if (!userId || isNaN(userId)) {
         return res.status(400).json({ error: 'Invalid userId parameter' });
     }
@@ -131,8 +129,7 @@ router.get('/requests/incoming', async (req, res) => {
 
 // get all outgoing friend requests for a user
 router.get('/requests/outgoing', async (req, res) => {
-    // const userId = req.session.accountId;
-    const userId = req.body.userId;
+    const userId = req.session.accountId;
     if (!userId || isNaN(userId)) {
         return res.status(400).json({ error: 'Invalid userId parameter' });
     }
@@ -151,8 +148,7 @@ router.get('/requests/outgoing', async (req, res) => {
 
 // accept/reject a friend request
 router.put('/requests/interact', async (req, res) => {
-    // const receiverId = req.session.accountId;
-    const receiverId = req.body.receiverId;
+    const receiverId = req.session.accountId;
     const { senderId, newStatus } = req.body;
 
     if (!receiverId || isNaN(receiverId) || !senderId || isNaN(senderId)) {
@@ -188,8 +184,7 @@ router.put('/requests/interact', async (req, res) => {
 
 // send a friend request
 router.post('/requests/send', async (req, res) => {
-    // const senderId = req.session.accountId;
-    const senderId = req.body.senderId;
+    const senderId = req.session.accountId;
     const { receiverId } = req.body;
 
     if (!senderId || isNaN(senderId) || !receiverId || isNaN(receiverId)) {
@@ -238,8 +233,7 @@ router.post('/requests/send', async (req, res) => {
 
 // delete a friend
 router.delete('/:friendId', async (req, res) => {
-    // const userId = req.session.accountId;
-    const userId = req.body.userId;
+    const userId = req.session.accountId;
     const friendId = req.params.friendId;
 
     if (!userId || isNaN(userId) || !friendId || isNaN(friendId)) {

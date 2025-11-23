@@ -4,11 +4,11 @@ const db = require('../db')
 
 const router = express.Router();
 
-router.use(session({
-    secret: 'superduper', 
-    resave: false, 
-    saveUninitialized: true, 
-}));
+// router.use(session({
+//     secret: 'superduper', 
+//     resave: false, 
+//     saveUninitialized: true, 
+// }));
 
 router.post('/signup', async (req, res) => {
     const username = req.body.username;
